@@ -1,5 +1,6 @@
 {% block head %}
-<nav class="navbar navbar-expand-sm sticky-top navbar-dark unique-color-dark">
+<nav class="navbar navbar-expand-sm sticky-top navbar-dark unique-color-dark ">
+    <div class="container">
             <a class="navbar-brand" href="{{url}}"><strong>Home</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
@@ -40,6 +41,8 @@
                 {% if sesja.login == true %}
                 <a href='{{url}}logowanie/wyloguj' role="button" class="btn btn-info btn-sm ml-4" >Wyloguj</a>
                 {% endif %}
+
             </div>
+    </div>
 </nav>
 {% endblock %}
