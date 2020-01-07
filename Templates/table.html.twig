@@ -9,8 +9,13 @@
 {% endblock %}
 
 {% block body %}
+    <h3>
+        {% block H3 %}
+            Tytuł tabeli
+        {% endblock %}
+    </h3>
     <div class="table-responsive">
-        <table id="myTable" class="table table-striped">
+        <table id="myTable" class="table table-striped" style="font-family: arial">
             {% block table %}
                 Tabela
             {% endblock %}

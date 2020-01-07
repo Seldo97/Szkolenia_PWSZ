@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 {% if uczestnik.email == sesja.email or sesja.id_uprawnienia == 2 or sesja.id_uprawnienia == 4 %}
-<form id = 'forms' method = 'POST' action = '{{url}}uczestnik/edit/{{uczestnik.id_uczestnik}}' >
+<form id = 'form' method = 'POST' action = '{{url}}uczestnik/edit/{{uczestnik.id_uczestnik}}' >
     <fieldset>
         <legend>Edytuj uczestnika</legend>
         <div class="form-group">

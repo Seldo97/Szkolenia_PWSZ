@@ -1,8 +1,37 @@
-{% block footer %}
-<footer class="footer font-small primary-color">
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark pt-4 position-static">
 
-  <div class="footer-copyright text-center py-3">© 2019/2020 Copyright:
-    Szkolenia.com
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+    {% if sesja.login == false %}
+          <li class="list-inline-item">
+            <h5 class="mb-1">Zarejestruj się za darmo</h5>
+          </li>
+          <li class="list-inline-item">
+            <a href="{{url}}rejestracja-uczestnika" class="btn btn-outline-white btn-rounded">Sign up!</a>
+          </li>
+     {% else %}
+         <li class="list-inline-item">
+           <h5 class="mb-1">Witaj {{ sesja.login }}!</h5>
+         </li>
+         <li class="list-inline-item">
+           <a href="{{url}}logowanie/wyloguj" class="btn btn-outline-white btn-rounded">Wyloguj</a>
+         </li>
+      {% endif %}
+    </ul>
+    <!-- Call to action -->
+
   </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href=""> SzkoleniaFajne.com</a>
+  </div>
+  <!-- Copyright -->
+
 </footer>
-{% endblock %}
+<!-- Footer -->

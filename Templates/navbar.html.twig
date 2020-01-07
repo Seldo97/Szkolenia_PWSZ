@@ -1,5 +1,5 @@
 {% block head %}
-<nav class="navbar navbar-expand-sm sticky-top navbar-dark">
+<nav class="navbar navbar-expand-sm sticky-top navbar-dark unique-color-dark">
             <a class="navbar-brand" href="{{url}}"><strong>Home</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,6 @@
 
                 {% if sesja.login == false %}
                 <a href='{{url}}logowanie' role="button" class="btn btn-info btn-sm" >Zaloguj</a>
-                <a href='{{url}}rejestracja-uczestnika' role="button" class="btn btn-info btn-sm ml-4" >Zarejestruj</a>
                 {% endif %}
 
                 {% if sesja.login == true %}
