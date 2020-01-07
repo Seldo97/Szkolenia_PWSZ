@@ -1,0 +1,126 @@
+{% extends 'table.html.twig' %}
+
+{% block title %}
+    Tabela szkolenia
+{% endblock %}
+
+    {% block table %}
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Data</th>
+            <th scope="col">Godzina</th>
+            <th scope="col">Nr sali</th>
+            <th scope="col">Trener</th>
+            <th scope="col">Status</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Opis</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for szkolenie in szkolenie %}
+            {% if szkolenie.trenerEmail == sesja.email %}
+                <tr>
+                  <td>{{ szkolenie.id_szkolenie }}</td>
+                  <td>{{ szkolenie.nazwa }}</td>
+                  <td><div style='width:85px'>{{ szkolenie.data }}</div></td>
+                  <td>{{ szkolenie.godzina }}</td>
+                  <td>{{ szkolenie.nr_sali }}</td>
+                  <td>{{ szkolenie.imieTrener }} {{ szkolenie.nazwiskoTrener }}</td>
+                  <td>{{ szkolenie.Status }}</td>
+                  <td>{{ szkolenie.cena }}zł</td>
+                  <td>{{ szkolenie.opis }}</td>
+                  <td class="text-right">
+                   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                       {% if sesja.id_uprawnienia == 1 %}
+                           <a class="btn btn-primary" href="{{url}}szkolenia/zapisz-sie/{{szkolenie.id_szkolenie}}" role="button">Zapisz się</a>
+                       {% elseif sesja.id_uprawnienia > 1 %}
+                           <a class="btn btn-secondary" href="{{url}}szkolenia/sprawdz_obecnosc/{{szkolenie.id_szkolenie}}" role="button">Sprawdź obecność</a>
+                           <a class="btn btn-danger" href="{{url}}szkolenia/usun/{{szkolenie.id_szkolenie}}" role="button">Usuń</a>
+                       {% endif %}
+                   </div>
+                  </td>
+                </tr>
+            {% elseif sesja.id_uprawnienia == 2 or sesja.id_uprawnienia == 4 or sesja.id_uprawnienia == 1 or sesja.id_uprawnienia is not defined %}
+                <tr>
+                  <td>{{ szkolenie.id_szkolenie }}</td>
+                  <td>{{ szkolenie.nazwa }}</td>
+                  <td><div style='width:85px'>{{ szkolenie.data }}</div></td>
+                  <td>{{ szkolenie.godzina }}</td>
+                  <td>{{ szkolenie.nr_sali }}</td>
+                  <td>{{ szkolenie.imieTrener }} {{ szkolenie.nazwiskoTrener }}</td>
+                  <td>{{ szkolenie.Status }}</td>
+                  <td>{{ szkolenie.cena }}zł</td>
+                  <td>{{ szkolenie.opis }}</td>
+                  <td class="text-right">
+                   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                       {% if sesja.id_uprawnienia == 1 or sesja.id_uprawnienia is not defined %}
+                           <a class="btn btn-primary" href="{{url}}szkolenia/zapisz-sie/{{szkolenie.id_szkolenie}}" role="button">Zapisz się</a>
+                       {% elseif sesja.id_uprawnienia > 1 %}
+                           <a class="btn btn-secondary" href="{{url}}szkolenia/sprawdz_obecnosc/{{szkolenie.id_szkolenie}}" role="button">Sprawdź obecność</a>
+                           <a class="btn btn-danger" href="{{url}}szkolenia/usun/{{szkolenie.id_szkolenie}}" role="button">Usuń</a>
+                       {% endif %}
+                   </div>
+                  </td>
+                </tr>
+            {% endif %}
+        {%  endfor %}
+    </tbody>
+    {% endblock %}
+
+{% block buttons %}
+    {{ session.username }}
+    {% if sesja.id_uprawnienia > 1 %}
+        <div style="margin-left: 20px">
+            <h2 class="display-4"> Dodaj szkolenie </h2>
+            <form action="szkolenia/dodaj" method="POST" id="formularz">
+                <div class="form-group">
+                    <div><label for="nazwa_firmy">Nazwa szkolenia</label>
+                        <input type="text" class="form-control  col-5" id="nazwa"
+                               name="nazwa" required="required"></div>
+                    <div><label for="data">Data</label>
+                        <input type="date" class="form-control  col-5" id="data"
+                               name="data" required="required"></div>
+                    <label for="godzina">Godzina</label>
+                    <div><input type="time" class="form-control  col-5" id="godzina"
+                                name="godzina" required="required"></div>
+                    <label for="nr_sali">Numer sali</label>
+                    <div><input type="numeric" class="form-control  col-5" id="nr_sali"
+                                name="nr_sali" required="required"></div>
+                    <div class="form-group">
+                        <label for="id_trener">Wybierz trenera</label>
+                        <select name="id_trener" class="form-control col-5">
+                            <option value="">--Wybierz trenera--</option>
+                            {% for trener in trenerzy %}
+                                {% if sesja.email == trener.email %}
+                                    <option value={{trener.id_trener}} selected >{{trener.imie}} {{trener.nazwisko}}</option>
+                                {% elseif sesja.id_uprawnienia == 2 or sesja.id_uprawnienia == 4 %}
+                                    <option value={{trener.id_trener}}>{{trener.imie}} {{trener.nazwisko}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_status">Wybierz status</label>
+                        <select name="id_status" class="form-control col-5">
+                            <option value="">--Wybierz status--</option>
+                                <option value="1">Dostępne</option>
+                                <option value="2">Odwołane</option>
+                                <option value="3">Zakończone</option>
+                        </select>
+                    </div>
+                    <div><label for="cena">Cena</label>
+                        <input type="number" class="form-control  col-5" id="cena"
+                               name="cena" required="required" step=".01"></div>
+                    <div><label for="opis">Opis</label>
+                        <input type="text" class="form-control  col-5" id="opis"
+                               name="opis"></div>
+                </div>
+                <button type="submit" class="btn btn-success">Dodaj &#43;</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}

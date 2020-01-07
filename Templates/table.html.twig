@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Tutuł strony
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{url}}js/dataTables.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="table-responsive">
+        <table id="myTable" class="table table-striped">
+            {% block table %}
+                Tabela
+            {% endblock %}
+        </table>
+    </div>
+    </br>
+    </br>
+
+    {% block buttons %}
+        Przyciski pod tabelą
+    {% endblock %}
+{% endblock %}

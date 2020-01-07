@@ -1,0 +1,52 @@
+{% extends 'table.html.twig' %}
+
+{% block title %}
+    Tabela Płatności
+{% endblock %}
+
+    {% block table %}
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Uczestnik</th>
+                <th scope="col">Szkolenie</th>
+                <th scope="col">Termin płatności</th>
+                <th scope="col">Kwota</th>
+                <th scope="col">Zaksięgowano</th>
+                <th scope="col">Data zaksięgowania</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for platnosc in platnosci %}
+            <tr>
+              <td>{{ platnosc.id_platnosc }}</td>
+              <td>{{ platnosc.uczestnik }}</td>
+              <td>{{ platnosc.szkolenie }}</td>
+              <td>{{ platnosc.termin }}</td>
+              <td>{{ platnosc.kwota }}zł</td>
+              {% if  platnosc.zaksiegowano != 1 %}
+                <td>Nie</td>
+              {% else %}
+                <td>Tak</td>
+              {% endif %}
+              {% if  platnosc.data_zaksiegowania == NULL or platnosc.data_zaksiegowania == 0 %}
+                <td>-</td>
+              {% else %}
+                <td>{{ platnosc.data_zaksiegowania }}</td>
+              {% endif %}
+
+              <td class="text-right">
+               <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                   <a class="btn btn-primary" href="{{url}}platnosc/zaksieguj/{{ platnosc.id_platnosc }}" role="button">Zaksięguj</a>
+              </td>
+            </tr>
+            {%  endfor %}
+        </div>
+        </tbody>
+
+    {% endblock %}
+
+    {% block buttons %}
+
+    {% endblock %}

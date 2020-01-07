@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Formularz
+{% endblock %}
+
+{% block body %}
+<form id = 'forms' method = 'POST' action = '{{url}}szkolenia/save/' >
+    <fieldset>
+        <legend>Zapis na szkolenie:</legend>
+        <div class="form-group">
+            <label for ='IdSzkolenia'>ID: </label>
+            <input id = 'idszkolenia'  type='text' value= '{{szkolenie.id_szkolenie}}' readonly name = 'idszkolenia' class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for ='NazwaSzkolenia'>Nazwa szkolenia:</label>
+            <input id = 'nazwa'  type='text' value= '{{szkolenie.nazwa}}' readonly name = 'nazwa' class="form-control"/>
+        </div>
+
+
+        <div class="form-group">
+            <label for ='Data'>Data szkolenia: </label>
+            <input id = 'data' type='text' value= '{{szkolenie.data}}' readonly name = 'data'  class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Godzina'>Godzina szkolenia:</label>
+            <input id = 'godzina' type='text' value= '{{szkolenie.godzina}}' readonly name = 'godzina' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='NrSali'>Nr sali:</label>
+            <input id = 'nr_sali'  type='text' value= '{{szkolenie.nr_sali}}' readonly name = 'nr_sali' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='IdTrener'>Trener:</label>
+            <input id = 'id_trener'  type='text' value= '{{ szkolenie.imieTrener }} {{ szkolenie.nazwiskoTrener }}' readonly name = 'id_trener' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Status'>Status szkolenia:</label>
+            <input id = 'id_status'  type='text' value= '{{ szkolenie.Status }}' readonly name = 'id_status' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Cena'>Cena za szkolenie:</label>
+            <input id = 'cena'  type='text' value= '{{szkolenie.cena}}' readonly name = 'cena' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Opis'>Opis:</label>
+            <input id = 'opis'  type='text' value= '{{szkolenie.opis}}' readonly name = 'opis' class="form-control" />
+        </div>
+
+        <div class="form-group">
+        <label for ='Uczestnik'>Uczestnik:</label>
+        <select  class='form-control' id='id_uczestnik' name='id_uczestnik' >
+            <option selected>Wybierz uczestnika...</option>
+            {% for row in uczestnik %}
+                {% if sesja.id_uprawnienia == 1 and row.email == sesja.email %}
+                    <option value ='{{row.id_uczestnik}}' selected> {{row.imie}} {{row.nazwisko}}</option>
+                {% elseif sesja.id_uprawnienia > 1 %}
+                    <option value ='{{row.id_uczestnik}}'> {{row.imie}} {{row.nazwisko}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        </div>
+
+        <div class="form-group">
+            <label for ='Obecnosc'>Obecność: </label>
+            <select  class='form-control' id='obecnosc' name='obecnosc' >
+                <option selected>Czy potwierdzasz swoją obecność na wybranym szkoleniu?</option>
+                <option value ='1'>Tak</option>
+                <option value ='0'>Nie</option>
+                <option value ='2'>Nie wiem</option>
+            </select>
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-success">Zapisz się</button>
+    <button type="reset" class="btn btn-secondary">Wyczyść pola</button>
+    <a href="{{url}}szkolenia" class="btn btn-info">Powrót</a>
+</form>
+{% endblock %}

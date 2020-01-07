@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}Tytuł{% endblock %}
+        </title>
+
+        <link rel="stylesheet" type="text/css" href="{{url}}css/custom.css">
+
+        <!-- <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+
+        <!-- JS i CSS niezbędny do działania strony -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/datatables.min.js"></script>
+
+        {% block js %}
+            <!-- Dodatkowy JS -->
+        {% endblock %}
+
+        {% block css %}
+            <!-- Dodatkowy CSS -->
+        {% endblock %}
+
+    {% endblock %}
+    </head>
+    <body>
+        {% include 'navbar.html.twig' %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    {% block body %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+        {% block footer %}
+                {% include 'footer.html.twig' %}
+        {% endblock %}
+</html>

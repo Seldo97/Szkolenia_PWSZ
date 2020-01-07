@@ -1,0 +1,46 @@
+{% block head %}
+<nav class="navbar navbar-expand-sm sticky-top navbar-dark">
+            <a class="navbar-brand" href="{{url}}"><strong>Home</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{{url}}szkolenia" id="navbardrop">
+                          Szkolenia
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{{url}}uczestnik" id="navbardrop">
+                          Uczestnik
+                        </a>
+                    </li>
+                {% if sesja.id_uprawnienia == 2 or sesja.id_uprawnienia == 4 %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="{{url}}platnosc" id="navbardrop">
+                          Płatności
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                          <a class="nav-link" href="{{url}}certyfikat" id="navbardrop">
+                          Certyfikaty
+                          </a>
+                    </li>
+                {% endif %}
+                </ul>
+
+                {% if sesja.login == false %}
+                <a href='{{url}}logowanie' role="button" class="btn btn-info btn-sm" >Zaloguj</a>
+                <a href='{{url}}rejestracja-uczestnika' role="button" class="btn btn-info btn-sm ml-4" >Zarejestruj</a>
+                {% endif %}
+
+                {% if sesja.login == true %}
+                <a href='{{url}}logowanie/wyloguj' role="button" class="btn btn-info btn-sm ml-4" >Wyloguj</a>
+                {% endif %}
+            </div>
+</nav>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Rejestracja użytkownika
+{% endblock %}
+
+{% block js %}
+    {# <script type="text/javascript" src="{{url}}js/dataTables.min.js"></script> #}
+{% endblock %}
+
+{% block body %}
+    <h3>Rejestracja użytkownika</h3>
+    <form method="post" action="rejestruj-uczestnika">
+
+        <h5 class="mt-4">Dane logowania</h5>
+        <div class="form-row justify-content-center">
+            <div class="form-group col-md-6">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" id="login" name="login" maxlength="50" required autofocus>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="haslo">Hasło</label>
+                <input type="password" class="form-control" id="haslo" name="haslo" maxlength="50" required>
+            </div>
+        </div>
+
+        <h5 class="mt-4">Dane osobiste</h5>
+        <div class="form-row mt-3 justify-content-center">
+            <div class="form-group col-md-4">
+                <label for="imie">Imię pierwsze</label>
+                <input type="text" class="form-control" id="imie" name="imie" maxlength="50" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="drugie_imie">Imię drugie</label>
+                <input type="text" class="form-control" id="drugie_imie" name="drugie_imie" maxlength="50">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="nazwisko">Nazwisko</label>
+                <input type="text" class="form-control" id="nazwisko" name="nazwisko" maxlength="50" required>
+            </div>
+        </div>
+        <div class="form-row mt-3 justify-content-center">
+            <div class="form-group col-md-6">
+                <label for="data_urodzenia">Data urodzenia</label>
+                <input type="text" class="form-control" id="data_urodzenia" name="data_urodzenia" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="wyksztalcenie">Wykształcenie</label>
+                <select name="id_wyksztalcenie" class="form-control">
+                {% for item in wyksztalcenie %}
+                     <option value="{{ item.id_wyksztalcenie }}">{{ item.nazwa }}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-row mt-3 mb-4 justify-content-center">
+            <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" maxlength="50" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="telefon">Telefon</label>
+                <input type="text" class="form-control" id="telefon" name="telefon" size="9" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Rejestruj</button>
+        <button type="reset" class="ml-5 btn btn-outline-danger">Wyczyść</button>
+    </form>
+{% endblock %}

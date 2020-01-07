@@ -1,0 +1,22 @@
+.page-footer
+{
+    background-color: #304ffe;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+
+}
+.navbar
+{
+    background-color: #304ffe;
+}
+
+p
+{
+    padding-top: 20px;
+    text-align: justify;
+}

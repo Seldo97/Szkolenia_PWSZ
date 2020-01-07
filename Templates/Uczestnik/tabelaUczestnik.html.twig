@@ -1,0 +1,68 @@
+{% extends 'table.html.twig' %}
+
+{% block title %}
+    Tabela uczestnik
+{% endblock %}
+
+    {% block table %}
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Imię</th>
+            <th scope="col">Drugie imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Data urodzenia</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">Wykształcenie</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for uczestnik in uczestnik %}
+            {% if sesja.id_uprawnienia == 1 and sesja.email == uczestnik.email %}
+                <tr>
+                  <td>{{ uczestnik.id_uczestnik }}</td>
+                  <td>{{ uczestnik.imie }}</td>
+                  <td>{{ uczestnik.drugie_imie }}</td>
+                  <td>{{ uczestnik.nazwisko }}</td>
+                  <td>{{ uczestnik.data_urodzenia }}</td>
+                  <td>{{ uczestnik.email }}</td>
+                  <td>{{ uczestnik.telefon }}</td>
+                  <td>{{ uczestnik.nazwa }}</td>
+                  <td class="text-right">
+                   <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                       <a class="btn btn-primary" href="{{url}}uczestnik/edytuj/{{ uczestnik.id_uczestnik }}" role="button">Edytuj</a>
+                   </div>
+                  </td>
+                </tr>
+            {% elseif sesja.id_uprawnienia > 1 %}
+                <tr>
+                  <td>{{ uczestnik.id_uczestnik }}</td>
+                  <td>{{ uczestnik.imie }}</td>
+                  <td>{{ uczestnik.drugie_imie }}</td>
+                  <td>{{ uczestnik.nazwisko }}</td>
+                  <td>{{ uczestnik.data_urodzenia }}</td>
+                  <td>{{ uczestnik.email }}</td>
+                  <td>{{ uczestnik.telefon }}</td>
+                  <td>{{ uczestnik.nazwa }}</td>
+                  {% if sesja.id_uprawnienia == 2 or sesja.id_uprawnienia == 4 %}
+                      <td class="text-right">
+                       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                           <a class="btn btn-primary" href="{{url}}uczestnik/edytuj/{{ uczestnik.id_uczestnik }}" role="button">Edytuj</a>
+                       </div>
+                      </td>
+                  {% else %}
+                    <td></td>
+                  {% endif %}
+                </tr>
+            {% endif %}
+
+        {%  endfor %}
+    </tbody>
+    {% endblock %}
+
+{% block buttons %}
+
+{% endblock %}

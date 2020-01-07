@@ -1,0 +1,81 @@
+{# {% extends 'base.html.twig' %} #}
+{% block css %}
+    <style>
+        #content{
+            text-align: center;
+            background-image: url('{{url}}images/bgcert.jpg');
+        }
+        #naglowek{
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            padding-left: 50px;
+        }
+        #numer{
+            font-style: italic;
+            font-size: 18px;
+            font-weight: normal;
+            text-decoration: none;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        #nazwisko{
+
+        }
+        #szkolenie{
+
+        }
+        #opis{
+
+        }
+        #data{
+
+        }
+        #podpis{
+            margin-top: 50px;
+            right: 0;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+    <div id="content">
+        <div id='naglowek'>
+            <p>Certyfikat <img src="{{url}}images/cert.png" width='50' height="70"/></p>
+        </div>
+        <p id='numer'>nr: {{ certyfikaty.id }}</p>
+        <div id="nazwisko">
+            <p>Przyznany dla:<br> <strong>{{certyfikaty.uczestnik}}</strong></p>
+        </div>
+        <div id="szkolenie">
+            <p>Za udział w szkoleniu:<br> <strong>{{certyfikaty.szkolenie}}</strong></p>
+        </div>
+        <div id="opis">
+            <p>Opis:<br> <strong>{{certyfikaty.opis}}</strong></p>
+        </div>
+        <div id="data">
+            <p>Data:<br> <strong>{{certyfikaty.data}}</strong></p>
+        </div>
+        <div id="podpis">
+            <p><strong>Dyrektor Marcin Olek</strong> <br>
+            <img src='{{url}}images/podpis.webp' width="100" height="80"></p>
+        </div>
+    </div>
+    <form>
+        <input type="hidden" value="cert_{{certyfikaty.id}}" id="id">
+        <input type="hidden" value="{{url}}certyfikat" id="url">
+    </form>
+
+    {% block js %}
+    <script>
+
+        window.onload = function() {
+            document.title = document.getElementById("id").value;
+            window.print();
+            window.onafterprint = function(event) {
+                window.location.href = document.getElementById("url").value;
+            };
+        }
+    </script>
+    {% endblock %}
+{% endblock %}

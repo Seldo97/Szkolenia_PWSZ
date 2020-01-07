@@ -1,0 +1,44 @@
+{% extends 'table.html.twig' %}
+
+{% block title %}
+    Tabela Certyfikaty
+{% endblock %}
+
+    {% block table %}
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Uczestnik</th>
+                <th scope="col">Szkolenie</th>
+                <th scope="col">Data</th>
+                <th scope="col">Obecność</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for certyfikat in certyfikaty %}
+            <tr>
+              <td>{{ certyfikat.id }}</td>
+              <td>{{ certyfikat.uczestnik }}</td>
+              <td>{{ certyfikat.szkolenie }}</td>
+              <td>{{ certyfikat.data }}</td>
+              {% if  certyfikat.obecnosc != 1 %}
+                <td>Nie</td>
+              {% else %}
+                <td>Tak</td>
+              {% endif %}
+
+              <td class="text-right">
+               <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                   <a class="btn btn-primary" href="{{url}}certyfikat/generuj/{{certyfikat.id_certyfikat}}" role="button">Generuj</a>
+              </td>
+            </tr>
+            {%  endfor %}
+        </div>
+        </tbody>
+
+    {% endblock %}
+
+    {% block buttons %}
+
+    {% endblock %}

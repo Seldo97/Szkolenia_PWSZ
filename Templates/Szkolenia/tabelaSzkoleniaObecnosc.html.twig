@@ -1,0 +1,45 @@
+{% extends 'table.html.twig' %}
+
+{% block title %}
+    Tabela Szkolenia Obecnosci
+{% endblock %}
+    {% block table %}
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Imię</th>
+            <th scope="col">Drugie imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Obecny</th>
+            <th scope="col">Zmień</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for uczestnik in uczestnicy %}
+            <tr>
+                <td>{{ uczestnik.id_szkolenie_uczestnik }}</td>
+                <td>{{ uczestnik.imie }}</td>
+                <td>{{ uczestnik.drugie_imie }}</td>
+                <td>{{ uczestnik.nazwisko }}</td>
+                {% if uczestnik.obecnosc == 1%}
+                    <td class="">Obecny</td>
+                {% else %}
+                    <td>Nieobecny</td>
+                {% endif %}
+                {% if uczestnik.obecnosc == 1%}
+                    <td><a class="btn btn-success" href="{{url}}szkolenia/zmien_obecnosc_nie/{{uczestnik.id_szkolenie_uczestnik }}" role="button">Zmień</a></td>
+                {% else %}
+                    <td><a class="btn btn-danger" href="{{url}}szkolenia/zmien_obecnosc_tak/{{uczestnik.id_szkolenie_uczestnik }}" role="button">Zmień</a></td>
+                {% endif %}
+            </tr>
+
+        {%  endfor %}
+        </tbody>
+        </div>
+
+    {% endblock %}
+
+{% block buttons %}
+    <a href="{{url}}szkolenia" class="btn btn-info">Powrót</a>
+{% endblock %}

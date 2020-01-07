@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% if uczestnik.email == sesja.email or sesja.id_uprawnienia == 2 or sesja.id_uprawnienia == 4 %}
+<form id = 'forms' method = 'POST' action = '{{url}}uczestnik/edit/{{uczestnik.id_uczestnik}}' >
+    <fieldset>
+        <legend>Edytuj uczestnika</legend>
+        <div class="form-group">
+            <label for ='IdUczestnik'>ID: </label>
+            <input id = 'iduczestnik'  type='text' name = 'iduczestnik' disabled='disabled' value='{{uczestnik.id_uczestnik}}' required='required' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Imie'>Imię: </label>
+            <input id = 'imie'  type='text' name = 'imie' value = '{{uczestnik.imie}}'  class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for ='DrugieImie'>Drugie imię: </label>
+            <input id = 'drugie_imie'  type='text' name = 'drugie_imie' value = '{{uczestnik.drugie_imie}}' class="form-control"/>
+        </div>
+
+
+        <div class="form-group">
+            <label for ='Nazwisko'>Nazwisko: </label>
+            <input id = 'nazwisko' type='text' value = '{{uczestnik.nazwisko}}' name = 'nazwisko'  class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='DataUrodzenia'>Data urodzenia:</label>
+            <input id = 'data_urodzenia' type='text' value = '{{uczestnik.data_urodzenia}}' name = 'data_urodzenia' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Email'>Email</label>
+            <input id = 'email' type='text' value = '{{uczestnik.email}}' name = 'email' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Telefon'>Telefon</label>
+            <input id = 'telefon'  type='text' value = '{{uczestnik.telefon}}' name = 'telefon' class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for ='Wyksztalcenie'>Wykształcenie: </label>
+            <select  class='form-control' id='wyksztalcenie' name='wyksztalcenie' >
+                <option selected>Wybierz wykształcenie...</option>");
+                {% for row in wyksztalcenie %}
+                    {% if row.id_wyksztalcenie == uczestnik.wyksztalcenie %}
+                            <option value ='{{row.id_wyksztalcenie}}' selected>{{row.nazwa}}</option>
+                    {% else %}
+                            <option value ='{{row.id_wyksztalcenie}}'>{{row.nazwa}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            {# <input id = 'wyksztalcenie' type='text' value = '{{uczestnik.wyksztalcenie}}' name = 'wyksztalcenie' required='required' class="form-control" /> #}
+        </div>
+
+        </fieldset>
+    <button type="submit" class="btn btn-success">Edytuj</button>
+    <button type="reset" class="btn btn-secondary">Przywróć</button>
+    <a href="{{url}}uczestnik" class="btn btn-info">Powrót</a>
+</form>
+{% else %}
+    <h2>Brak uprawnień!</h2>
+{% endif %}
+{% endblock %}
