@@ -64,7 +64,8 @@
                        {% if sesja.id_uprawnienia == 1 or sesja.id_uprawnienia is not defined %}
                            <a class="btn btn-primary" href="{{url}}szkolenia/zapisz-sie/{{szkolenie.id_szkolenie}}" role="button">Zapisz się</a>
                        {% elseif sesja.id_uprawnienia > 1 %}
-                           <a class="btn btn-secondary" href="{{url}}szkolenia/sprawdz_obecnosc/{{szkolenie.id_szkolenie}}" role="button">Sprawdź obecność</a>
+                           <a class="btn btn-secondary" href="{{url}}szkolenia/sprawdz_obecnosc/{{szkolenie.id_szkolenie}}" role="button">Lista obecności</a>
+                           <a class="btn btn-info" href="{{url}}szkolenia/formularz/{{szkolenie.id_szkolenie}}" role="button">Edytuj</a>
                            <a class="btn btn-danger" href="{{url}}szkolenia/usun/{{szkolenie.id_szkolenie}}" role="button">Usuń</a>
                        {% endif %}
                    </div>

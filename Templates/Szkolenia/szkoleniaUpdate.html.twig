@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Formularz
+{% endblock %}
+
+{% block body %}
+<form id = 'forms' method = 'POST' action = '{{url}}szkolenia/update' >
+        <div style="margin-left: 20px">
+            <h2 class="display-4"> Edytuj szkolenie </h2>
+                <div class="form-group">
+                    <div><label for="nazwa_firmy">Nazwa szkolenia</label>
+                        <input type="text" class="form-control  col-5" id="nazwa"
+                               name="nazwa" required="required" value="{{ szkolenie.nazwa }}"></div>
+                    <div><label for="data">Data</label>
+                        <input type="date" class="form-control  col-5" id="data"
+                               name="data" required="required" value={{ szkolenie.data }}></div>
+                    <label for="godzina">Godzina</label>
+                    <div><input type="time" class="form-control  col-5" id="godzina"
+                                name="godzina" required="required" value={{ szkolenie.godzina }}></div>
+                    <label for="nr_sali">Numer sali</label>
+                    <div><input type="numeric" class="form-control  col-5" id="nr_sali"
+                                name="nr_sali" required="required" value={{ szkolenie.nr_sali }}></div>
+                    <div class="form-group">
+                        <label for="id_trener">Wybierz trenera</label>
+                        <select name="id_trener" class="form-control col-5">
+                            <option value="">--Wybierz trenera--</option>
+                            {% for trener in trenerzy %}
+                                {% if sesja.email == trener.email %}
+                                    <option value={{trener.id_trener}} selected >{{trener.imie}} {{trener.nazwisko}}</option>
+                                {% elseif sesja.id_uprawnienia == 2 or sesja.id_uprawnienia == 4 %}
+                                    <option value={{trener.id_trener}}>{{trener.imie}} {{trener.nazwisko}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_status">Wybierz status</label>
+                        <select name="id_status" class="form-control col-5">
+                            <option value="">--Wybierz status--</option>
+                                <option value="1">Dostępne</option>
+                                <option value="2">Odwołane</option>
+                                <option value="3">Zakończone</option>
+                        </select>
+                    </div>
+                    <div><label for="cena">Cena</label>
+                        <input type="number" class="form-control  col-5" id="cena"
+                               name="cena" required="required" step=".01" value={{ szkolenie.cena }}></div>
+                    <div><label for="opis">Opis</label>
+                        <input type="text" class="form-control  col-5" id="opis"
+                               name="opis" value={{ szkolenie.opis }}></div>
+                    <input type="hidden" name="id" id="id" value={{id}}>
+                </div>
+                <button type="submit" class="btn btn-success">Edytuj</button>
+    <a href="{{url}}szkolenia" class="btn btn-info">Powrót</a>
+            </div>
+</form>
+{% endblock %}

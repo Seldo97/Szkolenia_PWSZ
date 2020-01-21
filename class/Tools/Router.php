@@ -28,6 +28,8 @@ class Router
           self::$router->map('POST','szkolenia/zapisz_obecnosc/?', array('controller' => 'Szkolenie', 'action' => 'zapiszObecnosc'), 'zapiszObecnosc');
           self::$router->map('GET','szkolenia/zmien_obecnosc_tak/[i:id]/?', array('controller' => 'Szkolenie', 'action' => 'zmienObecnoscTak'), 'zmienObecnoscTak');
           self::$router->map('GET','szkolenia/zmien_obecnosc_nie/[i:id]/?', array('controller' => 'Szkolenie', 'action' => 'zmienObecnoscNie'), 'zmienObecnoscNie');
+          self::$router->map('POST','szkolenia/update/?', array('controller' => 'Szkolenie', 'action' => 'update'), 'aktualizujDane');
+          self::$router->map('GET','szkolenia/formularz/[i:id]/?', array('controller' => 'Szkolenie', 'action' => 'createForm'), 'stworzFormularz');
 
           //Tabela uczestnik
           self::$router->map('GET','uczestnik', array('controller' => 'Uczestnik', 'action' => 'showView'), 'uczestnikTabela');

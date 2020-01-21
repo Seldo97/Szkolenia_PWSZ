@@ -62,6 +62,7 @@ final class Main extends Controller
 
         } catch(\Exception $e) {
             $this->redirect('404.html');
+            //d($e);
         }
 
     }

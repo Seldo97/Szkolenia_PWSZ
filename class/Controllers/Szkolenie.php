@@ -100,4 +100,42 @@ class Szkolenie extends Controller
 
         $this->redirect($_SERVER['HTTP_REFERER']);
     }
+    
+        public function createForm($id){
+        $trener = new T();
+		$daneTrenera = $trener->showView();
+        $szkolenie = new S();
+        $daneSzkolenie = $szkolenie->selectOneById($id);
+        //d($daneSzkolenie);
+         return $this->twig->render('Szkolenia/szkoleniaUpdate.html.twig', ['id' => $id,'szkolenie' =>$daneSzkolenie[0], 'url' => $this->url,
+			'sesja' => $_SESSION, 'trenerzy' => $daneTrenera,]);
+    }
+    
+        public function update(){
+		$nazwa = $_POST["nazwa"];
+		$data = $_POST["data"];
+		$godzina = $_POST["godzina"];
+		$nr_sali = $_POST["nr_sali"];
+		$id_trener = $_POST["id_trener"];
+		$id_status = $_POST["id_status"];
+		$cena = $_POST["cena"];
+		$opis = $_POST["opis"];
+        $id = $_POST["id"];
+
+        $szkolenie = new S();
+        if(isset($_POST["nazwa"]) && isset($_POST["nr_sali"]) && isset($_POST["cena"])
+        && (trim($_POST["nazwa"]!="")) && (trim($_POST["cena"]!=""))
+        && (trim($_POST["nr_sali"]!=""))){
+
+            $szkolenie->update($nazwa, $data, $godzina, $nr_sali, $id_trener, $id_status, $cena, $opis, $id);
+            $daneSzkolenie = $szkolenie->showView();
+            parent::redirect("szkolenia");
+
+        }else{
+
+            $daneDostawca = $dostawca->selectOneById($id);
+            return $this->twig->render('Szkolenia/szkoleniaUpdate.html.twig', ['id' => $id,'szkolenie' =>$daneSzkolenie[0], 'url' => $this->url,
+			'sesja' => $_SESSION, 'trenerzy' => $daneTrenera,]);
+        }
+    }
 }

@@ -88,6 +88,31 @@ class Szkolenie extends Model
             echo "Blad dodawania do tabeli szkolenie";
         }
     }
+    
+    public function update($nazwa, $data, $godzina, $nr_sali, $id_trener, $id_status, $cena, $opis, $id)
+    {
+        try	{
+            $q = 'UPDATE `szkolenie` SET `nazwa`=:nazwa, `data`=:data, `godzina`=:godzina, `nr_sali`=:nr_sali, 
+            `id_trener`=:id_trener, `id_status`=:id_status, `cena`=:cena, `opis`=:opis
+                WHERE `id_szkolenie` =:id ';
+            
+            $stmt = $this->pdo->prepare($q);
+            $stmt->bindValue(':nazwa', $nazwa, PDO::PARAM_STR);
+            $stmt->bindValue(':data', $data, PDO::PARAM_STR);
+            $stmt->bindValue(':godzina', $godzina, PDO::PARAM_STR);
+            $stmt->bindValue(':nr_sali', $nr_sali, PDO::PARAM_STR);
+            $stmt->bindValue(':id_trener', $id_trener, PDO::PARAM_INT);
+            $stmt->bindValue(':id_status', $id_status, PDO::PARAM_INT);
+            $stmt->bindValue(':cena', $cena, PDO::PARAM_STR);
+            $stmt->bindValue(':opis', $opis, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id,PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->closeCursor();
+        } catch(\PDOException $e) {
+            //d($e);
+            echo "Wystapil blad aktualizacji";
+        }
+    }
 
     public function showPresence($id)
     {
